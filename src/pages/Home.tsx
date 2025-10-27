@@ -3,6 +3,7 @@ import { Header } from '../components/Header'
 import { ProductGrid } from '../components/ProductGrid'
 import type { Product } from '../types'
 import { fetchProducts } from '@/lib/api'
+import { Skeleton } from '@/components/ui/skeleton'
 
 // Mock data - replace with Hygraph API calls
 const mockProducts: Product[] = [
@@ -121,14 +122,24 @@ function Home() {
   return (
     <>
       {loading && (
-        <div className="text-center py-16">
-          <p className="text-sm text-gray-600">Loading products...</p>
-        </div>
+        <section className="max-w-7xl mx-auto px-4 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-x-6 gap-y-12">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex flex-col items-center">
+                <Skeleton className="aspect-square w-full" />
+                <Skeleton className="w-2/3 h-4 mt-4" />
+                <Skeleton className="w-1/3 h-3 mt-2" />
+              </div>
+            ))}
+          </div>
+        </section>
       )}
       {error && (
-        <div className="text-center py-16">
-          <p className="text-sm text-red-600">{error}</p>
-        </div>
+        <section>
+          <div className="container mx-auto px-4 py-16 ">
+            <p className="text-sm text-red-600 text-center ">{error}</p>
+          </div>
+        </section>
       )}
       {!loading && !error && <ProductGrid products={products} />}
     </>

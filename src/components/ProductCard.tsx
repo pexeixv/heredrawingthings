@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Product } from '../types'
+import { Button } from './ui/button'
 
 interface ProductCardProps {
   product: Product
@@ -10,7 +11,8 @@ export function ProductCard({ product }: ProductCardProps) {
   const hasDiscount = product.salePrice && product.salePrice < product.price
 
   return (
-    <Link to={`/product/${product.slug}`} className="group block">
+    <div className="group block">
+      {/* <Link to={`/product/${product.slug}`} className="group block"> */}
       {/* Product Image */}
       <div className="aspect-square mb-3 overflow-hidden group-hover:scale-110 transition-transform">
         <img
@@ -44,7 +46,22 @@ export function ProductCard({ product }: ProductCardProps) {
             </>
           )}
         </div>
+        <div>
+          <Button
+            size="sm"
+            className="snipcart-add-item cursor-pointer mt-2 bg-transparent border border-black text-black rounded-none uppercase text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+            variant="outline"
+            data-item-id={product.id}
+            data-item-name={product.name}
+            data-item-price={product.salePrice || product.price}
+            data-item-url="/"
+            data-item-image={product.images[0]?.url}
+            data-config-add-product-behavior="none"
+          >
+            Add to Cart
+          </Button>
+        </div>
       </div>
-    </Link>
+    </div>
   )
 }

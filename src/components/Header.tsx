@@ -50,7 +50,7 @@ function Header() {
         {/* Cart Summary */}
         <div className="text-center">
           <button
-            className="text-xs text-gray-600 hover:text-black transition-colors inline-flex items-center gap-2"
+            className="text-xs text-gray-600 hover:text-black transition-colors inline-flex items-center gap-2 cursor-pointer"
             onClick={handleCartClick}
           >
             <ShoppingCart size={14} />
