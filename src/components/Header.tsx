@@ -16,23 +16,23 @@ function Header() {
   const [cartTotal] = useAtom(cartTotalAtom)
 
   const handleCartClick = () => {
-    if (window.Snipcart) {
-      window.Snipcart.api.theme.cart.open()
-    }
+    if (window.Snipcart) window.Snipcart.api.theme.cart.open()
   }
 
   return (
     <header className="w-full py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Logo */}
-        <div className="text-center mb-6">
+        <div className="text-center">
           <Link to="/">
-            <h1 className="text-2xl font-bold tracking-wider">HERE DRAWING THINGS</h1>
+            <h1 className="text-lg md:text-2xl font-bold hover:tracking-tight tracking-widest transition-all w-fit mx-auto">
+              HERE DRAWING THINGS
+            </h1>
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="text-center mb-4">
+        <nav className="text-center mb-4 hidden">
           <ul className="flex justify-center items-center gap-2 flex-wrap text-xs tracking-widest">
             {navItems.map((item) => (
               <li
@@ -48,7 +48,7 @@ function Header() {
         </nav>
 
         {/* Cart Summary */}
-        <div className="text-center">
+        <div className="text-center mt-2">
           <button
             className="text-xs text-gray-600 hover:text-black transition-colors inline-flex items-center gap-2 cursor-pointer"
             onClick={handleCartClick}
