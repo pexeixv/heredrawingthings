@@ -1,72 +1,109 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Terminal, ClipboardCopy, Check } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Header } from '../components/Header'
+import { ProductGrid } from '../components/ProductGrid'
+import type { Product } from '../types'
 
-const technologies = [
-  { name: 'Vite', url: 'https://vitejs.dev' },
-  { name: 'React', url: 'https://reactjs.org' },
-  { name: 'TypeScript', url: 'https://www.typescriptlang.org' },
-  { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
-  { name: 'shadcn/ui', url: 'https://ui.shadcn.com' },
-  { name: 'React Router', url: 'https://reactrouter.com' },
+// Mock data - replace with Hygraph API calls
+const mockProducts: Product[] = [
+  {
+    id: '1',
+    name: 'FLORAL ILLUSTRATION PRINT',
+    slug: 'floral-illustration-print',
+    price: 45.0,
+    images: [
+      {
+        id: '1',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [{ id: '1', name: 'Prints', slug: 'prints' }],
+    soldOut: false,
+  },
+  {
+    id: '2',
+    name: 'BOTANICAL SKETCH SET',
+    slug: 'botanical-sketch-set',
+    price: 65.0,
+    salePrice: 52.0,
+    images: [
+      {
+        id: '2',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [
+      { id: '1', name: 'Prints', slug: 'prints' },
+      { id: '2', name: 'Sale', slug: 'sale' },
+    ],
+    soldOut: false,
+  },
+  {
+    id: '3',
+    name: 'ABSTRACT WATERCOLOR',
+    slug: 'abstract-watercolor',
+    price: 38.0,
+    images: [
+      {
+        id: '3',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [{ id: '3', name: 'Originals', slug: 'originals' }],
+    soldOut: true,
+  },
+  {
+    id: '4',
+    name: 'PORTRAIT STUDY',
+    slug: 'portrait-study',
+    price: 55.0,
+    images: [
+      {
+        id: '4',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [{ id: '3', name: 'Originals', slug: 'originals' }],
+    soldOut: false,
+  },
+  {
+    id: '5',
+    name: 'LANDSCAPE SERIES NO. 3',
+    slug: 'landscape-series-3',
+    price: 48.0,
+    images: [
+      {
+        id: '5',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [{ id: '1', name: 'Prints', slug: 'prints' }],
+    soldOut: false,
+  },
+  {
+    id: '6',
+    name: 'MINIMALIST LINE WORK',
+    slug: 'minimalist-line-work',
+    price: 42.0,
+    images: [
+      {
+        id: '6',
+        url: 'https://i.ibb.co/LXCPjBrm/dj-old-english.png',
+      },
+    ],
+    categories: [{ id: '1', name: 'Prints', slug: 'prints' }],
+    soldOut: false,
+  },
 ]
 
-export default function Home() {
-  const [copied, setCopied] = useState(false)
+function Home() {
+  const [products, setProducts] = useState<Product[]>(mockProducts)
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText('git clone https://github.com/pexeixv/shadcn-starter')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  useEffect(() => {
+    // TODO: Fetch products from Hygraph
+    // fetchProducts();
+  }, [])
 
-  return (
-    <div className="flex flex-col items-center text-center gap-6 py-12">
-      <h1 className="text-4xl font-bold">
-        shadcn-starter by{' '}
-        <a href="//gavn.in" className="hover:underline">
-          Gavin Pereira
-        </a>
-      </h1>
-
-      <p className="text-muted-foreground text-sm flex flex-wrap justify-center gap-1">
-        {technologies.map((tech, index) => (
-          <span key={tech.name}>
-            {!!index && <span className="mx-1">&middot;</span>}
-            <a
-              href={tech.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-primary transition-colors"
-            >
-              {tech.name}
-            </a>
-          </span>
-        ))}
-      </p>
-
-      <Card className="w-full max-w-2xl p-0">
-        <CardContent className="p-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm font-mono">
-            <Terminal className="size-4" />
-            <span>git clone https://github.com/pexeixv/shadcn-starter</span>
-          </div>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleCopy}
-            aria-label="Copy to clipboard"
-            className="cursor-pointer"
-          >
-            {copied ? (
-              <Check className="size-4 text-green-500" />
-            ) : (
-              <ClipboardCopy className="size-4" />
-            )}
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
-  )
+  return <ProductGrid products={products} />
 }
+
+export default Home
