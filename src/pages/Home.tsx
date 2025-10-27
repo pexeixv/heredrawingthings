@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
 import { ProductGrid } from '../components/ProductGrid'
 import type { Product } from '../types'
+import { fetchProducts } from '@/lib/api'
 
 // Mock data - replace with Hygraph API calls
 const mockProducts: Product[] = [
@@ -96,14 +97,42 @@ const mockProducts: Product[] = [
 ]
 
 function Home() {
-  const [products, setProducts] = useState<Product[]>(mockProducts)
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // TODO: Fetch products from Hygraph
-    // fetchProducts();
+    const loadProducts = async () => {
+      try {
+        setLoading(true)
+        const data = await fetchProducts()
+        setProducts(data)
+      } catch (err) {
+        console.error('Failed to load products:', err)
+        setError('Failed to load products. Please try again later.')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadProducts()
   }, [])
 
-  return <ProductGrid products={products} />
+  return (
+    <>
+      {loading && (
+        <div className="text-center py-16">
+          <p className="text-sm text-gray-600">Loading products...</p>
+        </div>
+      )}
+      {error && (
+        <div className="text-center py-16">
+          <p className="text-sm text-red-600">{error}</p>
+        </div>
+      )}
+      {!loading && !error && <ProductGrid products={products} />}
+    </>
+  )
 }
 
 export default Home

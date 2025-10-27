@@ -34,19 +34,15 @@ function Header() {
         {/* Navigation */}
         <nav className="text-center mb-4">
           <ul className="flex justify-center items-center gap-2 flex-wrap text-xs tracking-widest">
-            {navItems.map((item, index) => (
-              <>
-                <li key={item.href}>
-                  <Link to={item.href} className="hover:opacity-60 transition-opacity">
-                    {item.label}
-                  </Link>
-                </li>
-                {index < navItems.length - 1 && (
-                  <li key={`sep-${index}`} className="text-gray-400">
-                    ·
-                  </li>
-                )}
-              </>
+            {navItems.map((item) => (
+              <li
+                key={item.href}
+                className="after:content-['•'] after:relative last:after:content-[''] after:ml-2"
+              >
+                <Link to={item.href} className="hover:opacity-60 transition-opacity">
+                  {item.label}
+                </Link>
+              </li>
             ))}
           </ul>
         </nav>
