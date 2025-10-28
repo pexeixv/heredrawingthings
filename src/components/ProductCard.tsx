@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div>
           <Button
             size="sm"
-            className="snipcart-add-item cursor-pointer mt-2 bg-transparent border border-black text-black rounded-none uppercase text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+            className="snipcart-add-item cursor-pointer mt-2 bg-transparent border border-black text-black rounded-none uppercase text-xs lg:opacity-0 group-hover:opacity-100 transition-opacity"
             variant="outline"
             data-item-id={product.id}
             data-item-name={product.name}
