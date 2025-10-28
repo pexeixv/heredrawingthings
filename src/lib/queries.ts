@@ -10,7 +10,11 @@ export const PRODUCT_FIELDS = gql`
     price
     images {
       id
-      url
+      url(
+        transformation: {
+          image: { resize: { width: 300, height: 300, fit: max }, quality: { value: 40 } }
+        }
+      )
     }
     categories {
       id

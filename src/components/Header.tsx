@@ -4,11 +4,9 @@ import { useAtom } from 'jotai'
 import { cartCountAtom, cartTotalAtom } from '../store/cart'
 
 const navItems = [
-  { label: 'SALE', href: '/sale' },
-  { label: 'PRINTS', href: '/prints' },
-  { label: 'ORIGINALS', href: '/originals' },
-  { label: 'COMMISSIONS', href: '/commissions' },
-  { label: 'ACCESSORIES', href: '/accessories' },
+  { label: 'Tees', href: '/tees' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Archieve', href: '/archieve' },
 ]
 
 function Header() {
@@ -20,26 +18,27 @@ function Header() {
   }
 
   return (
-    <header className="w-full py-8 px-4">
+    <header className="w-full px-4">
       <div className="max-w-7xl mx-auto">
         {/* Logo */}
         <div className="text-center">
           <Link to="/">
-            <h1 className="text-lg md:text-2xl font-bold hover:tracking-tight tracking-widest transition-all w-fit mx-auto">
+            <img src="/logo.svg" alt="" className="h-40 mx-auto" />
+            <h1 className="text-lg md:text-2xl font-bold hover:tracking-tight tracking-widest transition-all w-fit mx-auto sr-only">
               HERE DRAWING THINGS
             </h1>
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="text-center mb-4 hidden">
+        <nav className="text-center mb-4">
           <ul className="flex justify-center items-center gap-2 flex-wrap text-xs tracking-widest">
             {navItems.map((item) => (
               <li
                 key={item.href}
                 className="after:content-['•'] after:relative last:after:content-[''] after:ml-2"
               >
-                <Link to={item.href} className="hover:opacity-60 transition-opacity">
+                <Link to={item.href} className="hover:opacity-60 transition-opacity ">
                   {item.label}
                 </Link>
               </li>

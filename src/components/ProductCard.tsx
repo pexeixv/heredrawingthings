@@ -18,7 +18,9 @@ export function ProductCard({ product }: ProductCardProps) {
         <img
           src={product.images[0]?.url}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
+          className="w-full h-full object-contain group-hover:opacity-90 transition-opacity"
+          width={500}
+          height={500}
         />
       </div>
 
